@@ -1,4 +1,4 @@
-const { rekam_medis } = require("../../models");
+const { rekam_medis,pasien } = require("../../models");
 
 const getLaporan = async (req, res) => {
   const { tanggalawal } = req.params;
@@ -14,7 +14,14 @@ const getLaporan = async (req, res) => {
       where: {
         tanggal: tanggalawal
       },
-    });
+      include: [
+        {
+          model: pasien,
+          as: "pasien",
+          attributes: ["id", "nama"],
+        },
+      ],
+    }); 
 
     if (data.length === 0) {
       return res.status(404).json({
