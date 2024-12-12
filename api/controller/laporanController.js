@@ -40,4 +40,7 @@ const getLaporan = async (req, res) => {
   }
 };
 
+
+
+
 module.exports = { getLaporan };

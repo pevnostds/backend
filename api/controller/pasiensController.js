@@ -98,7 +98,7 @@ const createPasien = async (req, res) => {
     if (cekUserId) {
       return res
         .status(404)
-        .json({ status: "error", message: "Anda Sudah Mendaftar" });
+        .json({ status: "error", message: "Anda Sudah Mendaftar, Pendaftaran Hanya DiLakukan 1 Kali" });
     }
     const newPasien = await pasien.create({
       nama,
