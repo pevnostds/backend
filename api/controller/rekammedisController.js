@@ -46,9 +46,31 @@ const getRekamMedis = async (req, res) => {
   }
 };
 
+const getRekamMedisByUser = async (req, res) => {
+  try {
+    const data = await pasien.findOne({ where: { user_id: req.params.id } });
+    if (!data) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Data not found" });
+    }
+    const result = {
+      status: "success",
+      data: {
+        id: data.id,
+      },
+    };
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getRekamMedisById = async (req, res) => {
   try {
-    const data = await rekam_medis.findByPk(req.params.id, {
+    const data = await rekam_medis.findAll({
+      where: { pasien_id: req.params.id },
       include: [
         {
           model: pasien,
@@ -58,7 +80,7 @@ const getRekamMedisById = async (req, res) => {
       ],
     });
 
-    if (!data) {
+    if (data.length === 0) {
       return res
         .status(404)
         .json({ status: "error", message: "Data not found" });
@@ -66,16 +88,7 @@ const getRekamMedisById = async (req, res) => {
 
     const result = {
       status: "success",
-      data: {
-        id: data.id,
-        pasien_id: {
-          id: data.pasien.id,
-          nama: data.pasien.nama,
-        },
-        tanggal: data.tanggal,
-        keluhan: data.keluhan,
-        diagnosis: data.diagnosis,
-      },
+      data
     };
 
     res.status(200).json(result);
@@ -92,7 +105,7 @@ const createRekamMedis = async (req, res) => {
     }
 
     const { pasien_id, tanggal, keluhan, diagnosis } = req.body;
-    
+
     const newData = await rekam_medis.create({
       pasien_id,
       tanggal,
@@ -118,7 +131,7 @@ const updateRekamMedis = async (req, res) => {
     }
 
     const { id } = req.params;
-    const { pasien_id, tanggal, keluhan,diagnosis} = req.body;
+    const { pasien_id, tanggal, keluhan, diagnosis } = req.body;
 
     const [updated] = await rekam_medis.update(
       {
@@ -143,7 +156,7 @@ const updateRekamMedis = async (req, res) => {
     // Respon sukses
     res.status(200).json({
       status: "success",
-      data:updateData,
+      data: updateData,
       message: "Update Data Successfully",
     });
   } catch (err) {
@@ -177,4 +190,5 @@ module.exports = {
   createRekamMedis,
   updateRekamMedis,
   deleteRekamMedis,
+  getRekamMedisByUser,
 };
