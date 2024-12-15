@@ -178,7 +178,7 @@ const deletePasien = async (req, res) => {
         .json({ status: "error", message: "Pasien not found" });
     }
 
-    await pasien.destroy({ where: { id: req.params.id } });
+    await pasiens.destroy({ where: { id: req.params.id } });
 
     res
       .status(200)
