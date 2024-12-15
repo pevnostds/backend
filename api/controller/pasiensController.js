@@ -5,7 +5,7 @@ const getPasiens = async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
     const offset = (page - 1) * limit;
-    const countPasien = await pasien.count();
+    const countPasien = await pasiens.count();
 
     const totalPage = Math.ceil(countPasien / limit);
 
