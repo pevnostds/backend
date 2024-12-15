@@ -36,6 +36,10 @@ const options = {
         url: 'http://localhost:3003/api',
         description: 'Development server',
       },
+      {
+        url: 'https://backend-opal-delta.vercel.app/api',
+        description: 'Production server',
+      },
     ],
     components: {
       securitySchemes: {
@@ -58,7 +62,7 @@ const options = {
 
 
 const swaggerSpecification = swaggerJsdoc(options)
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecification))
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecification))
     
 app.get('/', (req, res) => {
   res.send({
