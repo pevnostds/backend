@@ -100,7 +100,7 @@ const createPasien = async (req, res) => {
         .status(404)
         .json({ status: "error", message: "Anda Sudah Mendaftar, Pendaftaran Hanya DiLakukan 1 Kali" });
     }
-    const newPasien = await pasien.create({
+    const newPasien = await pasiens.create({
       nama,
       alamat,
       jenis_kelamin,
@@ -147,7 +147,7 @@ const updatePasien = async (req, res) => {
         .json({ status: "error", message: "Pasien not found" });
     }
 
-    const updatedPasien = await pasien.findByPk(id);
+    const updatedPasien = await pasiens.findByPk(id);
 
     // Respon sukses
     res.status(200).json({
