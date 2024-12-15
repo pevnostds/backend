@@ -1,4 +1,4 @@
-const { pasien, rekam_medis } = require("../../models");
+const { pasiens, rekam_medis } = require("../../models");
 const rekamMedisValidations = require("../../validation/rekam-medis");
 
 const getRekamMedis = async (req, res) => {
@@ -12,8 +12,8 @@ const getRekamMedis = async (req, res) => {
     const data = await rekam_medis.findAll({
       include: [
         {
-          model: pasien,
-          as: "pasien",
+          model: pasiens,
+          as: "pasiens",
           attributes: ["id", "nama"],
         },
       ],
@@ -25,8 +25,8 @@ const getRekamMedis = async (req, res) => {
       data: {
         id: data.id,
         pasien_id: {
-          id: data.pasien.id,
-          nama: data.pasien.nama,
+          id: data.pasiens.id,
+          nama: data.pasiens.nama,
         },
         tanggal: data.tanggal,
         keluhan: data.keluhan,
@@ -48,7 +48,7 @@ const getRekamMedis = async (req, res) => {
 
 const getRekamMedisByUser = async (req, res) => {
   try {
-    const data = await pasien.findOne({ where: { user_id: req.params.id } });
+    const data = await pasiens.findOne({ where: { user_id: req.params.id } });
     if (!data) {
       return res
         .status(404)
@@ -73,8 +73,8 @@ const getRekamMedisById = async (req, res) => {
       where: { pasien_id: req.params.id },
       include: [
         {
-          model: pasien,
-          as: "pasien",
+          model: pasiens,
+          as: "pasiens",
           attributes: ["id", "nama"],
         },
       ],

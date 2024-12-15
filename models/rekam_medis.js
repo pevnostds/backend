@@ -2,14 +2,14 @@
 const {
   Model
 } = require('sequelize');
-const pasien = require('./pasien');
+const pasiens = require('./pasien');
 module.exports = (sequelize, DataTypes) => {
   class rekam_medis extends Model {
  
     static associate(models) {
-      rekam_medis.belongsTo(models.pasien, {
+      rekam_medis.belongsTo(models.pasiens, {
         foreignKey: 'pasien_id', 
-        as: 'pasien' 
+        as: 'pasiens' 
       });
       
     }

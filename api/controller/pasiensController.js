@@ -1,4 +1,4 @@
-const { pasien, users } = require("../../models");
+const { pasiens, users } = require("../../models");
 const pasienValidations = require("../../validation/pasiens");
 
 const getPasiens = async (req, res) => {
@@ -9,7 +9,7 @@ const getPasiens = async (req, res) => {
 
     const totalPage = Math.ceil(countPasien / limit);
 
-    const data = await pasien.findAll({
+    const data = await pasiens.findAll({
       include: [
         {
           model: users,
@@ -49,7 +49,7 @@ const getPasiens = async (req, res) => {
 
 const getPasienById = async (req, res) => {
   try {
-    const data = await pasien.findByPk(req.params.id, {
+    const data = await pasiens.findByPk(req.params.id, {
       include: [
         {
           model: users,
@@ -94,7 +94,7 @@ const createPasien = async (req, res) => {
     }
 
     const { nama, alamat, jenis_kelamin, umur, user_id } = req.body;
-    const cekUserId = await pasien.findOne({ where: { user_id } });
+    const cekUserId = await pasiens.findOne({ where: { user_id } });
     if (cekUserId) {
       return res
         .status(404)
@@ -128,7 +128,7 @@ const updatePasien = async (req, res) => {
     const { id } = req.params;
     const { nama, alamat, jenis_kelamin, umur, user_id } = req.body;
 
-    const [updated] = await pasien.update(
+    const [updated] = await pasiens.update(
       {
         nama,
         alamat,
@@ -170,7 +170,7 @@ const updatePasien = async (req, res) => {
 
 const deletePasien = async (req, res) => {
   try {
-    const deletedPasien = await pasien.findByPk(req.params.id);
+    const deletedPasien = await pasiens.findByPk(req.params.id);
 
     if (!deletedPasien) {
       return res

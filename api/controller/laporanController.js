@@ -1,4 +1,4 @@
-const { rekam_medis,pasien } = require("../../models");
+const { rekam_medis,pasiens } = require("../../models");
 
 const getLaporan = async (req, res) => {
   const { tanggalawal } = req.params;
@@ -16,8 +16,8 @@ const getLaporan = async (req, res) => {
       },
       include: [
         {
-          model: pasien,
-          as: "pasien",
+          model: pasiens,
+          as: "pasiens",
           attributes: ["id", "nama"],
         },
       ],

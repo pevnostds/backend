@@ -62,7 +62,7 @@ const options = {
 
 
 const swaggerSpecification = swaggerJsdoc(options)
-app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecification))
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecification));
     
 app.get('/', (req, res) => {
   res.send({
