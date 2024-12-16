@@ -4,7 +4,6 @@ const routers = require("./routes");
 const morgan = require("morgan");
 const swaggerJsdoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
-const CSS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
 const path = require('path');
 
 
@@ -57,14 +56,12 @@ const options = {
       },
     ],
   },
-  apis: [('../api/routes/*.js')],
+  apis: [path.join(__dirname, 'src/api/routes/*.js')]
 };
 
 
 const swaggerSpecification = swaggerJsdoc(options)
-app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecification, {
-  customCssUrl: CSS_URL
-}));
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecification));
 
 app.get('/', (req, res) => {
   res.send({
