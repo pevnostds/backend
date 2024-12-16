@@ -56,7 +56,7 @@ const options = {
       },
     ],
   },
-  apis: [path.join(__dirname, 'src/api/routes/*.js')]
+  apis: [path.join(__dirname, '../api/routes/*.js')]
 };
 
 
