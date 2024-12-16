@@ -56,14 +56,13 @@ const options = {
       },
     ],
   },
-  apis: [path.join(__dirname, '../api/routes/*.js')],
+  apis: [('../api/routes/*.js')],
 };
-
 
 
 const swaggerSpecification = swaggerJsdoc(options)
 app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecification));
-    
+
 app.get('/', (req, res) => {
   res.send({
     message: 'Hello 👋',
@@ -71,5 +70,6 @@ app.get('/', (req, res) => {
   })
 })
 app.listen(PORT, () => {
+  console.log(('../api/routes/*.js'))
   console.log(`Server is running on http://localhost:${PORT}`);
 });
