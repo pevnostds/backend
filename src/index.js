@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const routers = require("./routes");
 const morgan = require("morgan");
-const swaggerJsdoc = require('swagger-jsdoc')
-const swaggerUI = require('swagger-ui-express')
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 const path = require('path');
 
 
@@ -61,7 +61,7 @@ const options = {
 
 
 const swaggerSpecification = swaggerJsdoc(options)
-app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecification));
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecification));
 
 app.get('/', (req, res) => {
   res.send({
@@ -70,5 +70,6 @@ app.get('/', (req, res) => {
   })
 })
 app.listen(PORT, () => {
+
   console.log(`Server is running on http://localhost:${PORT}`);
 });
