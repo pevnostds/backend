@@ -25,9 +25,10 @@ const getRekamMedis = async (req, res) => {
       data: {
         id: data.id,
         pasien_id: {
-          id: data.pasiens.id,
-          nama: data.pasiens.nama,
+          id: data?.pasiens?.id || "",
+          nama: data?.pasiens?.nama || "",
         },
+
         tanggal: data.tanggal,
         keluhan: data.keluhan,
         diagnosis: data.diagnosis,
@@ -88,7 +89,7 @@ const getRekamMedisById = async (req, res) => {
 
     const result = {
       status: "success",
-      data
+      data,
     };
 
     res.status(200).json(result);
